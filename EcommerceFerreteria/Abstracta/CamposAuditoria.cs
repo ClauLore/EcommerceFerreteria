@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EcommerceFerreteria.Abstracta
+{
+    public abstract class CamposAuditoria
+    {
+       public DateTime FechaCreacion;
+       public DateTime FechaModificacion;
+    }
+}
