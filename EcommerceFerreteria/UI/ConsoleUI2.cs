@@ -81,11 +81,9 @@ namespace EcommerceFerreteria.UI
         {
             bool _isAlive = true;
             Console.Clear();
-            Console.WriteLine("=== VENTAS ===");
-
             while (_isAlive)
             {
-
+                Console.WriteLine("=== VENTAS ===");
                 Console.WriteLine("1. Registrar Venta");
                 Console.WriteLine("2. Anular Venta");
                 Console.WriteLine("3. Obtener Ventas por Vendedor");
@@ -564,7 +562,7 @@ namespace EcommerceFerreteria.UI
                     Console.WriteLine("Nombres inválido");
                     return;
                 }
-
+                Console.WriteLine("Ingrese apellidos del cliente:");
                 var apellidosCliente = Console.ReadLine();
                 if (apellidosCliente == null || apellidosCliente.Trim().Length == 0)
                 {
@@ -575,9 +573,6 @@ namespace EcommerceFerreteria.UI
                 cliente = _clienteService.ObtenerOCrearCliente(nombresCliente, apellidosCliente, dni, "");
 
 
-
-
-
             }
             bool regItem = true;
             var venta = new Venta();
@@ -586,18 +581,22 @@ namespace EcommerceFerreteria.UI
             while (regItem)
             { 
             //Registro de Venta Detalle
-            Console.WriteLine("Ingrese Item:");
-
-
             var item = new VentaDetalle();
-
-
-            Console.WriteLine("Item " + itemm.ToString("000"));
-
+            Console.WriteLine("Ingrese Item:"+ itemm.ToString("000"));
 
             Console.WriteLine("Seleccione Producto: ");
 
             var productos = _productoService.ProductosConStock();
+
+            if (productos.Count == 0)
+            {
+                    Console.WriteLine("No se ha registrado ningún producto... no se puede continuar con el registro de venta.");
+                    Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+            }    
+
             foreach(var prod in productos)
             {
                 Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}");
