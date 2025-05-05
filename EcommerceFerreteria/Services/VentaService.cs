@@ -80,7 +80,7 @@ namespace EcommerceFerreteria.Services
 
         List<Venta> IVentaService.ObtenerPorEstado(EstadoVenta estado)
         {
-            throw new NotImplementedException();
+            return _ventaRepository.ObtenerPorEstado(estado);
         }
 
         Venta IVentaService.ObtenerVentaPorID(int idVenta)
