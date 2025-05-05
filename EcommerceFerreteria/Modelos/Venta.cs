@@ -10,8 +10,6 @@ namespace EcommerceFerreteria.Modelos
 {
     public class Venta: Auditoria
     {
-        private static int _nextId=1;
-
         public int Id {  get; set; }
         public TipoDocumento TipoDocumento { get; set; }
         public string? SerieDoc { get; set; }
@@ -24,11 +22,7 @@ namespace EcommerceFerreteria.Modelos
 
         public List<VentaDetalle> Items {  get; set; }
 
-        public Venta()
-        {
-            Id = _nextId++;
-            FechaVenta = DateTime.Now;
-        }
+       
 
     }
 }
