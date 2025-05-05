@@ -14,6 +14,7 @@ namespace EcommerceFerreteria.Modelos
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string DNI { get; set; }
+        public string Email { get; set; }
         public Cliente()
         {
             Id = _nextId++;
