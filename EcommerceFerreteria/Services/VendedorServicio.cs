@@ -1,5 +1,4 @@
-﻿using EcommerceFerreteria.Interfaces;
-using EcommerceFerreteria.Modelos;
+﻿using EcommerceFerreteria.Modelos;
 using EcommerceFerreteria.Modelos.Enums;
 using EcommerceFerreteria.Repositories;
 using System;
@@ -10,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Services
 {
-    public class VendedorServicio : IVendedorServicio
+    public class VendedorService : IVendedorService
     {
         private readonly IVendedorRepository _vendedorRepository;
         private readonly IVentaRepository _ventaRepository;
 
-        public VendedorServicio(
+        public VendedorService(
         IVendedorRepository vendedorRepository,
         IVentaRepository ventaRepository)
         {
             this._vendedorRepository = vendedorRepository;
             this._ventaRepository = ventaRepository;
         }
-        Vendedor IVendedorServicio.ObtenerOCrearVendedor(string nombres, string apellidos, string DNI, string email)
+        Vendedor IVendedorService.ObtenerOCrearVendedor(string nombres, string apellidos, string DNI, string email)
         {
             var vendedor = _vendedorRepository.ObtenerPorDNI(DNI);
 
@@ -41,7 +40,7 @@ namespace EcommerceFerreteria.Services
             return vendedor;
         }
 
-        Vendedor IVendedorServicio.DeshabilitarVendedor(int idVendedor)
+        Vendedor IVendedorService.DeshabilitarVendedor(int idVendedor)
         {
             var vendedor = _vendedorRepository.ObtenerPorId(idVendedor);
             vendedor.Estado = Estado.INACTIVO;
@@ -50,22 +49,22 @@ namespace EcommerceFerreteria.Services
             return vendedor;
         }
 
-        List<Vendedor> IVendedorServicio.ObtenerVendedores()
+        List<Vendedor> IVendedorService.ObtenerVendedores()
         {
             return _vendedorRepository.ObtenerTodo();
         }
 
-        List<Vendedor> IVendedorServicio.ObtenerVendedorPorEstado(Estado estado)
+        List<Vendedor> IVendedorService.ObtenerVendedorPorEstado(Estado estado)
         {
             return _vendedorRepository.ObtenerPorEstado(estado);
         }
 
-        Vendedor IVendedorServicio.ObtenerVendedorPorId(int id)
+        Vendedor IVendedorService.ObtenerVendedorPorId(int id)
         {
             return _vendedorRepository.ObtenerPorId(id);
         }
 
-        List<Venta> IVendedorServicio.ObtenerVentasPorVendedor(int vendedorId)
+        List<Venta> IVendedorService.ObtenerVentasPorVendedor(int vendedorId)
         {
             return _ventaRepository.ObtenerPorVendedor(vendedorId);
         }

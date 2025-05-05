@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Services
 {
-    public interface IVendedorServicio
+    public interface IVendedorService
     {
         Vendedor ObtenerOCrearVendedor(string nombres, string apellidos, string DNI, string email);
         Vendedor ObtenerVendedorPorId(int id);

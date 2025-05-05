@@ -46,9 +46,10 @@ namespace EcommerceFerreteria.Repositories
             return _ventas.Where(v => v.IdCliente == idCliente).ToList();
         }
 
-        List<Venta> IVentaRepository.ObtenerPorDocumento(TipoDocumento tipoDoc, string serieDoc, string numeroDoc)
+
+        Venta IVentaRepository.ObtenerPorDocumento(TipoDocumento tipoDoc, string serieDoc, string numeroDoc)
         {
-            return _ventas.Where(v => v.TipoDocumento == tipoDoc && v.SerieDoc==serieDoc && v.NumeroDoc==numeroDoc).ToList();
+            return _ventas.FirstOrDefault(v => v.TipoDocumento == tipoDoc && v.SerieDoc == serieDoc && v.NumeroDoc == numeroDoc);
         }
 
         List<Venta> IVentaRepository.ObtenerPorEstado(EstadoVenta estado)
@@ -64,6 +65,11 @@ namespace EcommerceFerreteria.Repositories
         List<Venta> IVentaRepository.ObtenerPorRangoFecha(DateOnly fechaInicio, DateOnly fechaFin)
         {
             return _ventas.Where(v => DateOnly.FromDateTime(v.FechaVenta) >= fechaInicio && DateOnly.FromDateTime(v.FechaVenta) <= fechaFin).ToList();
+        }
+
+        List<Venta> IVentaRepository.ObtenerPorTipoDocumento(TipoDocumento tipoDoc)
+        {
+            throw new NotImplementedException();
         }
 
         List<Venta> IVentaRepository.ObtenerPorVendedor(int idVendedor)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Services
 {
-    internal interface IProductoService
+    public interface IProductoService
     {
         Producto CrearProducto(string descripcion, decimal precio, int stock,Estado estado, CategoriaProducto categoria);
         Producto DeshabilitarProducto(int IdProducto);
