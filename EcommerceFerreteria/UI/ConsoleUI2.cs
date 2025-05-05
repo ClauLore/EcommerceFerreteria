@@ -29,6 +29,10 @@ namespace EcommerceFerreteria.UI
 
         public void Iniciar()
         {
+            try
+            {
+
+            
             Console.Clear();
             Console.WriteLine("=== Sistema de Ventas E-commerce Ferretería ===");
             bool _isAlive = true;
@@ -65,6 +69,8 @@ namespace EcommerceFerreteria.UI
                 Console.ReadKey();
                 Console.Clear();
             }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
         private void MenuPrincipal()
         {
@@ -513,7 +519,48 @@ namespace EcommerceFerreteria.UI
 
         private void DeshabilitarProducto()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======DESHABILITAR PRODUCTO========");
+
+            var productos = _productoService.ProductosConStock();
+            if (productos.Count == 0)
+            {
+                Console.WriteLine("No se ha registrado ningún producto...");
+                Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+
+            foreach (var prod in productos)
+            {
+                Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}, Estado: {prod.Estado}");
+
+            }
+
+            Console.WriteLine("Ingrese el identificador del producto a deshabilitar:");
+            if (!int.TryParse(Console.ReadLine(), out int productoIndex) ||
+            productoIndex < 1 || productoIndex > productos.Count)
+            {
+                Console.WriteLine("Selección de producto inválida.");
+                return;
+            }
+
+            var product= _productoService.DeshabilitarProducto(productoIndex);
+
+            if (product != null)
+            {
+                Console.WriteLine("El producto se deshabilitó correctamente!");
+            }
+            else
+            {
+                Console.WriteLine("Ocurrió un error al deshabilitar el producto!");
+            }
+
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
+
         }
 
         private void RegistrarVenta()
