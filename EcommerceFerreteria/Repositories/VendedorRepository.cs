@@ -14,6 +14,11 @@ namespace EcommerceFerreteria.Repositories
         private List<Vendedor> _vendedores = new List<Vendedor>();
         private int _nextId = 1;
 
+        public VendedorRepository() 
+        { 
+            _vendedores.Add(new Vendedor { Id = _nextId, Nombres = "Rodolfo", Apellidos = "Rosales", DNI = "25725485", Email = "rrosales@ferreteria.com.pe", Estado = Estado.ACTIVO });
+        }
+
         void IRepository<Vendedor>.Actualizar(Vendedor entidad)
         {
            var index = _vendedores.FindIndex(v=> v.Id==entidad.Id);

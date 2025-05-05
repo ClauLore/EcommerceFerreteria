@@ -14,6 +14,7 @@ namespace EcommerceFerreteria.Services
         private readonly IVendedorRepository _vendedorRepository;
         private readonly IVentaRepository _ventaRepository;
 
+        
         public VendedorService(
         IVendedorRepository vendedorRepository,
         IVentaRepository ventaRepository)
