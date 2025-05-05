@@ -66,10 +66,7 @@ namespace EcommerceFerreteria.Services
             return _ventaRepository.ObtenerPorVendedor(idVendedor);
         }
 
-        bool IVentaService.AnularVenta(TipoDocumento tipoDocumento, string serieDoc, string numeroDoc)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         List<Venta> IVentaService.ObtenerPorCliente(int idCliente)
         {
