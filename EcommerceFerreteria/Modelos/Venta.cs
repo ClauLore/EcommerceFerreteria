@@ -3,6 +3,7 @@ using EcommerceFerreteria.Modelos.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +23,14 @@ namespace EcommerceFerreteria.Modelos
 
         public List<VentaDetalle> Items {  get; set; }
 
-       
+
+        public override string ToString()
+        {
+           
+            return $"Venta # {Id}: Tipo Documento: {TipoDocumento}, Serie-Número: {SerieDoc}-{NumeroDoc} , Fecha: {FechaVenta} , Total: {Total} \n"
+                  ;
+                
+        }
 
     }
 }

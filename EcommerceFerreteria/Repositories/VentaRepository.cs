@@ -15,6 +15,11 @@ namespace EcommerceFerreteria.Repositories
 
         private int _nextId = 1;
 
+        public List<Venta> ObtenerPorTipoDocumento(TipoDocumento tipoDoc)
+        {
+            return _ventas.Where(v => v.TipoDocumento == tipoDoc).ToList();
+        }
+
         void IRepository<Venta>.Actualizar(Venta entidad)
         {
             var index = _ventas.FindIndex(c => c.Id == entidad.Id);
@@ -39,6 +44,11 @@ namespace EcommerceFerreteria.Repositories
         List<Venta> IVentaRepository.ObtenerPorCliente(int idCliente)
         {
             return _ventas.Where(v => v.IdCliente == idCliente).ToList();
+        }
+
+        List<Venta> IVentaRepository.ObtenerPorDocumento(TipoDocumento tipoDoc, string serieDoc, string numeroDoc)
+        {
+            return _ventas.Where(v => v.TipoDocumento == tipoDoc && v.SerieDoc==serieDoc && v.NumeroDoc==numeroDoc).ToList();
         }
 
         List<Venta> IVentaRepository.ObtenerPorEstado(EstadoVenta estado)

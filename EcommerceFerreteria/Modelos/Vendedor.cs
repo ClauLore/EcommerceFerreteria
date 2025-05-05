@@ -12,6 +12,10 @@ namespace EcommerceFerreteria.Modelos
     {
         public int Id { get; set; } 
         public Estado Estado { get; set; } = Estado.ACTIVO;
-
+        
+        public override string ToString()
+        {
+            return $"Vendedor # {Id}: Nombres y Apellidos: {Nombres} {Apellidos}, DNI: {DNI}, Estado: {Estado}";
+        }
     }
 }
