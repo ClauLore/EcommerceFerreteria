@@ -17,14 +17,9 @@ namespace EcommerceFerreteria.Modelos
         public string? Descripcion { get; set; }
         public decimal Precio { get; set; }
         public int Stock { get; set; }
-        public bool Estado { get; set; }
+        public Estado Estado { get; set; } = Estado.ACTIVO;
 
         public CategoriaProducto CategoriaProducto { get; set; }
-
-        public Producto()
-        {
-            Id = _nextId++;
-        }
 
         public override string ToString()
         {
