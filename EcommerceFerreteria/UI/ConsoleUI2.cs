@@ -542,7 +542,7 @@ namespace EcommerceFerreteria.UI
 
             Console.WriteLine("Ingrese el DNI del Cliente:");
             var dni = Console.ReadLine();
-            if (!int.TryParse(Console.ReadLine(), out int _) ||dni.Trim().Length<8 || dni.Trim().Length > 8)
+            if (!int.TryParse(dni, out int _) ||dni.Trim().Length<8 || dni.Trim().Length > 8)
             {
                 Console.WriteLine("DNI inválido");
                 return;
@@ -558,20 +558,21 @@ namespace EcommerceFerreteria.UI
             {
                 Console.WriteLine("El cliente no existe");
                 Console.WriteLine("Ingrese nombres del cliente:");
-                var nombres = Console.ReadLine();
-                if (nombres== null || nombres.Trim().Length == 0)
+                var nombresCliente = Console.ReadLine();
+                if (nombresCliente == null || nombresCliente.Trim().Length == 0)
                 {
                     Console.WriteLine("Nombres inválido");
                     return;
                 }
-                var apellidos = Console.ReadLine();
-                if (apellidos == null ||  apellidos.Trim().Length == 0)
+
+                var apellidosCliente = Console.ReadLine();
+                if (apellidosCliente == null || apellidosCliente.Trim().Length == 0)
                 {
                     Console.WriteLine("Apellidos inválido");
                     return;
                 }
 
-                cliente = _clienteService.ObtenerOCrearCliente(nombres, apellidos, dni, "");
+                cliente = _clienteService.ObtenerOCrearCliente(nombresCliente, apellidosCliente, dni, "");
 
 
 
