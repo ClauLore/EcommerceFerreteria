@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Abstracta
 {
-    public abstract class CamposAuditoria
+    public abstract class Auditoria
     {
-       public DateTime FechaCreacion;
+       public DateTime FechaCreacion = DateTime.Now;
        public DateTime FechaModificacion;
     }
 }

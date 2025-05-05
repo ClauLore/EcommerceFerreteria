@@ -8,24 +8,21 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Modelos
 {
-    public class Venta: CamposAuditoria
+    public class Venta: Auditoria
     {
         private static int _nextId=1;
 
         public int Id {  get; set; }
         public TipoDocumento TipoDocumento { get; set; }
-        public string SerieDoc { get; set; }
-        public string NumeroDoc { get; set; }
-
-        public Cliente Cliente { get; set; }
+        public string? SerieDoc { get; set; }
+        public string? NumeroDoc { get; set; }
+        public int IdCliente { get; set; }
         public DateTime FechaVenta { get; set; }
         public decimal Total { get; set; }
-        public Estado Estado { get; set; }
+        public EstadoVenta Estado { get; set; } = EstadoVenta.EN_PROCESO;
+        public int IdVendedor { get; set; }
 
-        public CategoriaProducto CategoriaProducto { get; set; }
-        public Vendedor Vendedor { get; set; }
-
-        public List<VentaDetalle> ventasDetalle {  get; set; }
+        public List<VentaDetalle> Items {  get; set; }
 
         public Venta()
         {

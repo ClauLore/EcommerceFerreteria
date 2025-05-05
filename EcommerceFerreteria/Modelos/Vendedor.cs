@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Modelos
 {
-    public class Vendedor:CamposAuditoria
+    public class Vendedor:Auditoria
     {
         private static int _nextId = 1;
 
         public int Id { get; set; } 
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
+        public string? Nombres { get; set; }
+        public string? Apellidos { get; set; }
 
-        public Estado Estado { get; set; }
+        public Estado Estado { get; set; } = Estado.ACTIVO;
 
         public Vendedor()
         {

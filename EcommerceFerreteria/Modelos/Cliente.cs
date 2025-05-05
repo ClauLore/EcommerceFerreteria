@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Modelos
 {
-    public class Cliente: CamposAuditoria
+    public class Cliente: Auditoria
     {
         private static int _nextId = 1;
         public int Id { get; set; }
