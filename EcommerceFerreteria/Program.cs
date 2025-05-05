@@ -1,4 +1,7 @@
 ﻿using EcommerceFerreteria.Modelos;
+using EcommerceFerreteria.Repositories;
+using EcommerceFerreteria.Services;
+using EcommerceFerreteria.UI;
 
 namespace EcommerceFerreteria
 {
@@ -6,15 +9,16 @@ namespace EcommerceFerreteria
     {
         static void Main(string[] args)
         {
+   
 
-            Console.WriteLine("=== E-Commerce Ferretería ===\n");
-            SistemaEcommerceFerreteria sistema = new SistemaEcommerceFerreteria();
-            CargarDatosIniciales(sistema);
-        }
+           var clienteService = new ClienteService(new ClienteRepository(), new VentaRepository());
+           var vendedorService = new VendedorService(new VendedorRepository(), new VentaRepository());
+           var productoService = new ProductoService(new ProductoRepository(), new VentaRepository());
+           var ventaService = new VentaService(new ClienteRepository(), new VentaRepository());
 
-        private static void CargarDatosIniciales(SistemaEcommerceFerreteria sistema)
-        {
+            var ui = new ConsoleUI(productoService, vendedorService, clienteService,ventaService);
 
-        }
+            ui.Iniciar();
+        }  
     }
 }
