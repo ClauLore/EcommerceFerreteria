@@ -12,7 +12,6 @@ namespace EcommerceFerreteria.Repositories
     {
         List<Venta> ObtenerPorVendedor(int idVendedor);
         List<Venta> ObtenerPorRangoFecha(DateOnly fechaInicio , DateOnly fechaFin);
-        //List<Producto> ObtenerProductosMasVendido();
         List<Venta> ObtenerPorCliente(int idCliente);
 
         List<Venta> ObtenerPorEstado(EstadoVenta estado);
