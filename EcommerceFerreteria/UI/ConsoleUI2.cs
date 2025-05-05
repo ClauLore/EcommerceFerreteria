@@ -450,7 +450,36 @@ namespace EcommerceFerreteria.UI
 
         private void ObtenerProductosPorCategorias()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("=========LISTAR PRODUCTOS POR CATEGORÍA============");
+            Console.WriteLine("Seleccionar Categoría:");
+            int index = 0;
+            foreach (var categoria1 in Enum.GetValues<CategoriaProducto>())
+            {
+                Console.WriteLine($"{index++}. {categoria1}");
+            }
+            Console.Write("Ingrese el identificador de la categoría: ");
+
+            if (!Enum.TryParse(Console.ReadLine(), out CategoriaProducto categoria))
+                categoria = CategoriaProducto.OTRO;
+
+            var productosCategoria= _productoService.ObtenerPorCategoria(categoria);
+
+            if (productosCategoria.Count == 0)
+            {
+                Console.WriteLine($"No se ha registrado ´ningún producto para la categoría { categoria}");
+                Console.Clear();
+                return;
+
+            }
+            
+            foreach( var prod in productosCategoria)
+            {
+                Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}, Estado: {prod.Estado}");
+            }
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private void RegistrarProducto()
@@ -666,7 +695,7 @@ namespace EcommerceFerreteria.UI
 
             foreach(var prod in productos)
             {
-                Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}");
+                Console.WriteLine($"ID:{prod.Id}, Descripción: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}");
 
             }
             Console.WriteLine("Ingrese ID del producto: ");
@@ -731,7 +760,9 @@ namespace EcommerceFerreteria.UI
 
 
             if (confirmacion)
-                Console.WriteLine($"La venta se registró satisfactoriamente!");
+                Console.WriteLine($"Total Venta S/. "+ venta.Total.ToString("F2"));
+
+            Console.WriteLine($"La venta se registró satisfactoriamente!");
            else
                 Console.WriteLine("Ocurrió un error al registrar la venta!");
             
