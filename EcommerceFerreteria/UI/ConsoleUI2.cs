@@ -203,7 +203,56 @@ namespace EcommerceFerreteria.UI
 
         private void RegistrarCliente()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======REGISTRAR CLIENTE========");
+            Console.WriteLine("Nombres:");
+            var nombres = Console.ReadLine();
+
+            if (nombres == null || nombres.Trim().Length == 0)
+            {
+                Console.WriteLine("Nombre inválido");
+                return;
+            }
+
+            Console.WriteLine("Apellidos:");
+            var apellidos = Console.ReadLine();
+
+            if (apellidos == null || apellidos.Trim().Length == 0)
+            {
+                Console.WriteLine("Apellidos inválidos");
+                return;
+            }
+
+            Console.WriteLine("DNI:");
+            var dni = Console.ReadLine();
+
+            if (dni == null || dni.Trim().Length == 0 || !int.TryParse(Console.ReadLine(), out int _))
+            {
+                Console.WriteLine("DNI inválido");
+                return;
+            }
+
+            Console.WriteLine("Email:");
+            var email = Console.ReadLine();
+
+            if (email == null || email.Trim().Length == 0)
+            {
+                Console.WriteLine("Email inválido");
+                return;
+            }
+
+            var cliente = _clienteService.ObtenerOCrearCliente(nombres, apellidos, dni, email);
+
+            if (cliente != null)
+            {
+                if (cliente.Id > 0)
+                    Console.WriteLine($"El cliente se creó satisfactoriamente con el ID :{cliente.Id}");
+                else
+                    Console.WriteLine("Ocurrió un error al crear al cliente!");
+            }
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+
         }
 
         private void ManetenimientoVendedores()
