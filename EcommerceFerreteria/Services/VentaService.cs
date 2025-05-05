@@ -29,21 +29,9 @@ namespace EcommerceFerreteria.Services
             return true;
         }
 
-        public bool CrearVenta(TipoDocumento tipoDocumento, string serieDoc, string numeroDoc, int IdCliente, DateTime FechaVenta, decimal Total, int IdVendedor, List<VentaDetalle> Items)
+        public bool CrearVenta(Venta venta)
         {
-              var  venta = new Venta
-                {
-                  TipoDocumento = tipoDocumento,
-                  SerieDoc = serieDoc,
-                  NumeroDoc = numeroDoc,
-                  IdCliente = IdCliente,
-                  FechaVenta = FechaVenta,
-                  Total = Total,
-                  IdVendedor = IdVendedor,
-                  Items = Items
-
-                };
-                _ventaRepository.Agregar(venta);
+            _ventaRepository.Agregar(venta);
             
             return true;
         }

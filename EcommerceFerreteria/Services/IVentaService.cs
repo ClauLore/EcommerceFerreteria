@@ -10,7 +10,7 @@ namespace EcommerceFerreteria.Services
 {
     public interface IVentaService
     {
-        bool CrearVenta(TipoDocumento tipoDocumento, string serieDoc, string numeroDoc, int IdCliente, DateTime FechaVenta, decimal Total, int IdVendedor, List<VentaDetalle> Items);
+        bool CrearVenta(Venta venta);
         List<Venta> ObtenerPorVendedor(int idVendedor);
         List<Venta> ObtenerPorRangoFecha(DateOnly fechaInicio, DateOnly fechaFin);
         List<Venta> ObtenerPorCliente(int idCliente);

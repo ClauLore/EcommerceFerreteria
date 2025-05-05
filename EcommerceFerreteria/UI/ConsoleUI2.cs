@@ -533,7 +533,7 @@ namespace EcommerceFerreteria.UI
             }
 
             Console.Write("Fecha venta (MM/DD/YYYY HH:MM): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime fechaVenta))
             {
                 Console.WriteLine("Fecha inválida.");
                 return;
@@ -571,19 +571,27 @@ namespace EcommerceFerreteria.UI
                     return;
                 }
 
-                var clienteNew = _clienteService.ObtenerOCrearCliente(nombres, apellidos, dni, "");
+                cliente = _clienteService.ObtenerOCrearCliente(nombres, apellidos, dni, "");
+
+
 
 
 
             }
+            bool regItem = true;
+            var venta = new Venta();
+            var items = new List<VentaDetalle>();
+            while (regItem)
+            { 
             //Registro de Venta Detalle
             Console.WriteLine("Ingrese Item:");
-            var items = new List<VentaDetalle>();
+
+
             var item = new VentaDetalle();
 
-            var index = 1;
+            int itemm = 1;
 
-            Console.WriteLine("Item " + index.ToString("000"));
+            Console.WriteLine("Item " + itemm.ToString("000"));
 
 
             Console.WriteLine("Seleccione Producto: ");
@@ -615,36 +623,51 @@ namespace EcommerceFerreteria.UI
             Console.WriteLine("Precio venta: " + (productoSel.Precio * cantidad).ToString("F2"));
 
 
+            item.Item = itemm;
+            item.Cantidad= cantidad;
+            item.IdProducto = productoSel.Id;
+            item.PrecioVenta=productoSel.Precio;
+            item.Subtotal= cantidad*productoSel.Precio;
 
+            items.Add(item);
+            itemm++;
 
+            Console.WriteLine("¿Desea ingresar otro Item? y/n: ");
+            var respuesta = Console.ReadLine();
 
+            if (respuesta == "n")
+                {
+                    regItem=false;
+                }
 
-
-            Console.WriteLine("Seleccione Categoría:");
-            var index = 0;
-            foreach (var categoria in Enum.GetValues(typeof(CategoriaProducto)))
-            {
-                Console.WriteLine($"{index++} - {categoria}");
             }
-            Console.Write("Ingrese una opción (Identificador): ");
 
 
-            if (!Enum.TryParse(Console.ReadLine(), out CategoriaProducto categoriaIng))
+
+            decimal total = 0;
+            foreach(var item2 in items)
             {
-                Console.WriteLine("Categoría inválida.");
-                return;
+                total = total + item2.Subtotal;
             }
 
+            venta.TipoDocumento = tipoDocIng;
+            venta.SerieDoc = serie;
+            venta.NumeroDoc = numero;
+            venta.IdCliente = cliente.Id;
+            venta.FechaVenta = fechaVenta;
+            venta.IdVendedor = 1;
+            venta.Items = items;
+            venta.Total = total;
 
-            var producto = _productoService.CrearProducto(descripcion, precio, stock, categoriaIng);
+            var confirmacion = _ventaService.CrearVenta(venta);
 
-            if (producto != null)
-            {
-                if (producto.Id > 0)
-                    Console.WriteLine($"El producto se creó satisfactoriamente con el ID :{producto.Id}");
-                else
-                    Console.WriteLine("Ocurrió un error al crear el producto!");
-            }
+
+
+            if (confirmacion)
+                Console.WriteLine($"La venta se registró satisfactoriamente!");
+           else
+                Console.WriteLine("Ocurrió un error al registrar la venta!");
+            
 
             Console.WriteLine("\nPresiones cualquier tecla para continuar...");
             Console.ReadKey();
