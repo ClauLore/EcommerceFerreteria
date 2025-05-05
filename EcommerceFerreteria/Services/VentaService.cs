@@ -12,14 +12,12 @@ namespace EcommerceFerreteria.Services
 {
     public class VentaService : IVentaService
     {
-        private readonly IClienteRepository _clienteRepository;
         private readonly IVentaRepository _ventaRepository;
 
         public VentaService(
         IClienteRepository clienteRepository,
         IVentaRepository ventaRepository)
         {
-            this._clienteRepository = clienteRepository;
             this._ventaRepository = ventaRepository;
         }
 
