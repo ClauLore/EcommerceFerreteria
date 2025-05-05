@@ -8,19 +8,10 @@ using System.Threading.Tasks;
 
 namespace EcommerceFerreteria.Modelos
 {
-    public class Vendedor:Auditoria
+    public class Vendedor:Persona
     {
-        private static int _nextId = 1;
-
         public int Id { get; set; } 
-        public string? Nombres { get; set; }
-        public string? Apellidos { get; set; }
-
         public Estado Estado { get; set; } = Estado.ACTIVO;
 
-        public Vendedor()
-        {
-            Id = _nextId++;
-        }
     }
 }
