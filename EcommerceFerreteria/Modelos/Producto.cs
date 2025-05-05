@@ -11,8 +11,6 @@ namespace EcommerceFerreteria.Modelos
 {
     public class Producto:Auditoria
     {
-        private static int _nextId = 1;
-
         public int Id { get; set; }
         public string? Descripcion { get; set; }
         public decimal Precio { get; set; }
