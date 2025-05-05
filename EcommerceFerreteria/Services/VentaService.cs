@@ -65,5 +65,50 @@ namespace EcommerceFerreteria.Services
         {
             return _ventaRepository.ObtenerPorVendedor(idVendedor);
         }
+
+        bool IVentaService.AnularVenta(TipoDocumento tipoDocumento, string serieDoc, string numeroDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IVentaService.CrearVenta(Venta venta)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Venta> IVentaService.ObtenerPorCliente(int idCliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        Venta IVentaService.ObtenerPorDocumento(TipoDocumento tipoDoc, string serieDoc, string numeroDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Venta> IVentaService.ObtenerPorEstado(EstadoVenta estado)
+        {
+            throw new NotImplementedException();
+        }
+
+        Venta IVentaService.ObtenerVentaPorID(int idVenta)
+        {
+        return _ventaRepository.ObtenerPorId(idVenta);
+        }
+
+        List<Venta> IVentaService.ObtenerPorRangoFecha(DateOnly fechaInicio, DateOnly fechaFin)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Venta> IVentaService.ObtenerPorTipoDocumento(TipoDocumento tipoDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Venta> IVentaService.ObtenerPorVendedor(int idVendedor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

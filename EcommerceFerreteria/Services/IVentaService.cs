@@ -12,6 +12,7 @@ namespace EcommerceFerreteria.Services
     {
         bool CrearVenta(Venta venta);
         List<Venta> ObtenerPorVendedor(int idVendedor);
+        Venta ObtenerVentaPorID(int idVenta);
         List<Venta> ObtenerPorRangoFecha(DateOnly fechaInicio, DateOnly fechaFin);
         List<Venta> ObtenerPorCliente(int idCliente);
         List<Venta> ObtenerPorEstado(EstadoVenta estado);

@@ -141,7 +141,54 @@ namespace EcommerceFerreteria.UI
 
         private void AnularVenta()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======ANULAR VENTA========");
+
+            var ventas = _ventaService.ObtenerPorEstado(EstadoVenta.CERRADO);
+            if (ventas.Count == 0)
+            {
+                Console.WriteLine("No se ha registrado ninguna venta...");
+                Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+
+            foreach (var vent in ventas)
+            {
+                Console.WriteLine(vent.ToString());
+
+            }
+
+            Console.WriteLine("Ingrese el identificador de venta a anular:");
+            if (!int.TryParse(Console.ReadLine(), out int ventaIndex) ||
+            ventaIndex < 1 || ventaIndex > ventas.Count)
+            {
+                Console.WriteLine("Selección de venta inválida.");
+                return;
+            }
+
+            var ventaAnular= _ventaService.ObtenerVentaPorID(ventaIndex);
+
+            if (ventaAnular == null)
+            {
+                Console.WriteLine("Ocurrió un error al seleccionar la venta");
+                return ;
+            }
+
+            var confirmacion = _ventaService.AnularVenta(ventaAnular.TipoDocumento,ventaAnular.SerieDoc,ventaAnular.NumeroDoc);
+            if (confirmacion)
+            {
+                Console.WriteLine("La venta se anuló correctamente!");
+            }
+            else
+            {
+                Console.WriteLine("Ocurrió un error al anular la venta!");
+            }
+
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private void MentenimientoClientes()
@@ -754,16 +801,18 @@ namespace EcommerceFerreteria.UI
             venta.IdVendedor = 1;
             venta.Items = items;
             venta.Total = total;
+            venta.Estado= EstadoVenta.CERRADO;
 
             var confirmacion = _ventaService.CrearVenta(venta);
 
 
 
             if (confirmacion)
+            { 
                 Console.WriteLine($"Total Venta S/. "+ venta.Total.ToString("F2"));
-
-            Console.WriteLine($"La venta se registró satisfactoriamente!");
-           else
+                Console.WriteLine($"La venta se registró satisfactoriamente!");
+            }
+            else
                 Console.WriteLine("Ocurrió un error al registrar la venta!");
             
 
