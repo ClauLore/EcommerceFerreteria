@@ -320,7 +320,55 @@ namespace EcommerceFerreteria.UI
 
         private void RegistrarVendedor()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======REGISTRAR VENDEDOR========");
+            Console.WriteLine("Nombres:");
+            var nombres = Console.ReadLine();
+
+            if (nombres == null || nombres.Trim().Length == 0)
+            {
+                Console.WriteLine("Nombre inválido");
+                return;
+            }
+
+            Console.WriteLine("Apellidos:");
+            var apellidos = Console.ReadLine();
+
+            if (apellidos == null || apellidos.Trim().Length == 0)
+            {
+                Console.WriteLine("Apellidos inválidos");
+                return;
+            }
+
+            Console.WriteLine("DNI:");
+            var dni = Console.ReadLine();
+
+            if (dni == null || dni.Trim().Length == 0 || !int.TryParse(Console.ReadLine(), out int _))
+            {
+                Console.WriteLine("DNI inválido");
+                return;
+            }
+
+            Console.WriteLine("Email:");
+            var email = Console.ReadLine();
+
+            if (email == null || email.Trim().Length == 0)
+            {
+                Console.WriteLine("Email inválido");
+                return;
+            }
+
+            var vendedor = _vendedorService.ObtenerOCrearVendedor(nombres, apellidos, dni, email);
+
+            if (vendedor != null)
+            {
+                if (vendedor.Id > 0)
+                    Console.WriteLine($"El vendedor se creó satisfactoriamente con el ID :{vendedor.Id}");
+                else
+                    Console.WriteLine("Ocurrió un error al crear al vendedor!");
+            }
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
         private void MantenimientoProductos()
