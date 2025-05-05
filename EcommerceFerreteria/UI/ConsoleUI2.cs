@@ -142,11 +142,11 @@ namespace EcommerceFerreteria.UI
         {
             bool _isAlive = true;
             Console.Clear();
-            Console.WriteLine("=== CLIENTES ===");
+           
 
             while (_isAlive)
             {
-
+                Console.WriteLine("=== CLIENTES ===");
                 Console.WriteLine("1. Registrar Cliente");
                 Console.WriteLine("2. Deshabilitar Cliente");
                 Console.WriteLine("3. Obtener Cliente por DNI");
@@ -375,10 +375,10 @@ namespace EcommerceFerreteria.UI
         {
             bool _isAlive = true;
             Console.Clear();
-            Console.WriteLine("=== PRODUCTOS ===");
 
             while (_isAlive)
             {
+                Console.WriteLine("=== PRODUCTOS ===");
                 Console.WriteLine("1. Registrar Producto");
                 Console.WriteLine("2. Deshabilitar Producto");
                 Console.WriteLine("3. Obtener Productos por Categoría");
@@ -417,7 +417,29 @@ namespace EcommerceFerreteria.UI
 
         private void ListarProductos()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("=========LISTAR PRODUCTOS============");
+
+            var productos = _productoService.ObtenerProductos();
+
+            if (productos.Count == 0)
+            {
+                Console.WriteLine("No se ha registrado ningún producto...");
+                Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+
+            foreach (var prod in productos)
+            {
+                Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}, Estado: {prod.Estado}");
+
+            }
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private void ObtenerProductosPorCategorias()
@@ -479,12 +501,10 @@ namespace EcommerceFerreteria.UI
 
             Console.WriteLine("\nPresiones cualquier tecla para continuar...");
             Console.ReadKey();
+            Console.Clear();
         }
 
-        private void ListarProductosConStock()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private void ObtenerVentasPorVendedor()
         {
