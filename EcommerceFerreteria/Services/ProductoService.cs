@@ -63,12 +63,17 @@ namespace EcommerceFerreteria.Services
 
         List<Producto> IProductoService.ProductosConStock()
         {
-            throw new NotImplementedException();
+            return _productoRepository.ProductosConStock();
         }
 
         List<Producto> IProductoService.ObtenerProductos()
         {
             return _productoRepository.ObtenerTodo();
+        }
+
+        Producto IProductoService.ObtenerProductoPorID(int IdProducto)
+        {
+            return _productoRepository.ObtenerPorId(IdProducto);
         }
     }
 }

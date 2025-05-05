@@ -15,5 +15,7 @@ namespace EcommerceFerreteria.Services
         List<Producto> ObtenerPorCategoria(CategoriaProducto categoria);
         List<Producto> ProductosConStock();
         List<Producto> ObtenerProductos();
+        Producto ObtenerProductoPorID(int IdProducto);
+
     }
 }

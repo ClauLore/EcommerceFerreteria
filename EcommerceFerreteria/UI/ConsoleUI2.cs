@@ -1,4 +1,5 @@
-﻿using EcommerceFerreteria.Modelos.Enums;
+﻿using EcommerceFerreteria.Modelos;
+using EcommerceFerreteria.Modelos.Enums;
 using EcommerceFerreteria.Services;
 using System;
 using System.Collections.Generic;
@@ -499,7 +500,154 @@ namespace EcommerceFerreteria.UI
 
         private void RegistrarVenta()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======REGISTRAR VENTA========");
+            Console.WriteLine("Seleccione Tipo Documento:");
+            var index = 0;
+            foreach (var tipoDoc in Enum.GetValues(typeof(TipoDocumento)))
+            {
+                Console.WriteLine($"{index++} - {tipoDoc}");
+            }
+            Console.Write("Ingrese una opción (Identificador): ");
+
+
+            if (!Enum.TryParse(Console.ReadLine(), out TipoDocumento tipoDocIng))
+            {
+                Console.WriteLine("Tipo Documento inválido.");
+                return;
+            }
+
+            Console.WriteLine("Serie Documento:");
+            var serie = Console.ReadLine();
+            if (serie.Trim().Length == 0)
+            {
+                Console.WriteLine("Serie inválida");
+                return;
+            }
+
+            Console.WriteLine("Número Documento:");
+            var numero = Console.ReadLine();
+            if (numero.Trim().Length == 0)
+            {
+                Console.WriteLine("Número Documento inválido");
+                return;
+            }
+
+            Console.Write("Fecha venta (MM/DD/YYYY HH:MM): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
+            {
+                Console.WriteLine("Fecha inválida.");
+                return;
+            }
+
+
+            Console.WriteLine("Ingrese el DNI del Cliente:");
+            var dni = Console.ReadLine();
+            if (!int.TryParse(Console.ReadLine(), out int _) ||dni.Trim().Length<8 || dni.Trim().Length > 8)
+            {
+                Console.WriteLine("DNI inválido");
+                return;
+            }
+
+            var cliente = _clienteService.ObtenerClientePorDNI(dni);
+
+            if (cliente != null)
+            {
+                Console.WriteLine($"{cliente.Nombres} {cliente.Apellidos}");
+            }
+            else
+            {
+                Console.WriteLine("El cliente no existe");
+                Console.WriteLine("Ingrese nombres del cliente:");
+                var nombres = Console.ReadLine();
+                if (nombres== null || nombres.Trim().Length == 0)
+                {
+                    Console.WriteLine("Nombres inválido");
+                    return;
+                }
+                var apellidos = Console.ReadLine();
+                if (apellidos == null ||  apellidos.Trim().Length == 0)
+                {
+                    Console.WriteLine("Apellidos inválido");
+                    return;
+                }
+
+                var clienteNew = _clienteService.ObtenerOCrearCliente(nombres, apellidos, dni, "");
+
+
+
+            }
+            //Registro de Venta Detalle
+            Console.WriteLine("Ingrese Item:");
+            var items = new List<VentaDetalle>();
+            var item = new VentaDetalle();
+
+            var index = 1;
+
+            Console.WriteLine("Item " + index.ToString("000"));
+
+
+            Console.WriteLine("Seleccione Producto: ");
+
+            var productos = _productoService.ProductosConStock();
+            foreach(var prod in productos)
+            {
+                Console.WriteLine($"ID: {prod.Descripcion},Precio: {prod.Precio},Stock: {prod.Stock},Categoría: {prod.CategoriaProducto}");
+
+            }
+            Console.WriteLine("Ingrese ID del producto: ");
+            if (!int.TryParse(Console.ReadLine(), out int productoIndex) ||
+             productoIndex < 1 || productoIndex > productos.Count)
+            {
+                Console.WriteLine("Producto seleccionado inválido.");
+                return;
+            }
+
+            Console.WriteLine("Ingrese Cantidad: ");
+            if (!int.TryParse(Console.ReadLine(), out int cantidad))
+            {
+                Console.WriteLine("Cantidad inválida");
+                return;
+            }
+
+            var productoSel = _productoService.ObtenerProductoPorID(productoIndex);
+
+            Console.WriteLine("Precio unitario: " + productoSel.Precio.ToString("F2"));
+            Console.WriteLine("Precio venta: " + (productoSel.Precio * cantidad).ToString("F2"));
+
+
+
+
+
+
+
+            Console.WriteLine("Seleccione Categoría:");
+            var index = 0;
+            foreach (var categoria in Enum.GetValues(typeof(CategoriaProducto)))
+            {
+                Console.WriteLine($"{index++} - {categoria}");
+            }
+            Console.Write("Ingrese una opción (Identificador): ");
+
+
+            if (!Enum.TryParse(Console.ReadLine(), out CategoriaProducto categoriaIng))
+            {
+                Console.WriteLine("Categoría inválida.");
+                return;
+            }
+
+
+            var producto = _productoService.CrearProducto(descripcion, precio, stock, categoriaIng);
+
+            if (producto != null)
+            {
+                if (producto.Id > 0)
+                    Console.WriteLine($"El producto se creó satisfactoriamente con el ID :{producto.Id}");
+                else
+                    Console.WriteLine("Ocurrió un error al crear el producto!");
+            }
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
         }
     }
 }
