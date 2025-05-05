@@ -12,6 +12,8 @@ namespace EcommerceFerreteria.Repositories
     public class VendedorRepository : IVendedorRepository
     {
         private List<Vendedor> _vendedores = new List<Vendedor>();
+        private int _nextId = 1;
+
         void IRepository<Vendedor>.Actualizar(Vendedor entidad)
         {
            var index = _vendedores.FindIndex(v=> v.Id==entidad.Id);
@@ -23,6 +25,7 @@ namespace EcommerceFerreteria.Repositories
 
         void IRepository<Vendedor>.Agregar(Vendedor entidad)
         {
+            entidad.Id = _nextId++;
             _vendedores.Add(entidad);
         }
 
