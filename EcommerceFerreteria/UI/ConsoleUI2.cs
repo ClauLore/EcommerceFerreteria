@@ -581,6 +581,7 @@ namespace EcommerceFerreteria.UI
             bool regItem = true;
             var venta = new Venta();
             var items = new List<VentaDetalle>();
+            int itemm = 1;
             while (regItem)
             { 
             //Registro de Venta Detalle
@@ -589,7 +590,6 @@ namespace EcommerceFerreteria.UI
 
             var item = new VentaDetalle();
 
-            int itemm = 1;
 
             Console.WriteLine("Item " + itemm.ToString("000"));
 
@@ -635,7 +635,7 @@ namespace EcommerceFerreteria.UI
             Console.WriteLine("¿Desea ingresar otro Item? y/n: ");
             var respuesta = Console.ReadLine();
 
-            if (respuesta == "n")
+            if (respuesta.ToLower() != "y")
                 {
                     regItem=false;
                 }
