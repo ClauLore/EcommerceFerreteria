@@ -10,9 +10,10 @@ namespace EcommerceFerreteria.Services
 {
     public interface IProductoService
     {
-        Producto CrearProducto(string descripcion, decimal precio, int stock,Estado estado, CategoriaProducto categoria);
+        Producto CrearProducto(string descripcion, decimal precio, int stock, CategoriaProducto categoria);
         Producto DeshabilitarProducto(int IdProducto);
         List<Producto> ObtenerPorCategoria(CategoriaProducto categoria);
         List<Producto> ProductosConStock();
+        List<Producto> ObtenerProductos();
     }
 }

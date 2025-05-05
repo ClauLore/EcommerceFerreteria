@@ -11,6 +11,7 @@ namespace EcommerceFerreteria.Modelos.Enums
         AGUA,
         ELECTRICOS,
         AGREGADOS,
-        TORNILLOS
+        TORNILLOS,
+        OTRO
     }
 }

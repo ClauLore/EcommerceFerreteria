@@ -41,7 +41,7 @@ namespace EcommerceFerreteria.Services
             return producto;
         }
 
-        Producto IProductoService.CrearProducto(string descripcion, decimal precio, int stock, Estado estado, CategoriaProducto categoria)
+        Producto IProductoService.CrearProducto(string descripcion, decimal precio, int stock, CategoriaProducto categoria)
         {
 
            var producto = new Producto
@@ -49,7 +49,6 @@ namespace EcommerceFerreteria.Services
                  Descripcion = descripcion,
                  Precio = precio,
                  Stock = stock,
-                 Estado = estado,
                  CategoriaProducto = categoria
                 };
                 _productoRepository.Agregar(producto);
@@ -62,6 +61,14 @@ namespace EcommerceFerreteria.Services
             return _productoRepository.ObtenerPorCategoria(categoria);
         }
 
-     
+        List<Producto> IProductoService.ProductosConStock()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Producto> IProductoService.ObtenerProductos()
+        {
+            return _productoRepository.ObtenerTodo();
+        }
     }
 }
