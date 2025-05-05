@@ -71,11 +71,6 @@ namespace EcommerceFerreteria.Services
             throw new NotImplementedException();
         }
 
-        bool IVentaService.CrearVenta(Venta venta)
-        {
-            throw new NotImplementedException();
-        }
-
         List<Venta> IVentaService.ObtenerPorCliente(int idCliente)
         {
             throw new NotImplementedException();
