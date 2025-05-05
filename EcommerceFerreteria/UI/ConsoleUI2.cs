@@ -1,4 +1,5 @@
-﻿using EcommerceFerreteria.Services;
+﻿using EcommerceFerreteria.Modelos.Enums;
+using EcommerceFerreteria.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -382,7 +383,7 @@ namespace EcommerceFerreteria.UI
                 Console.WriteLine("1. Registrar Producto");
                 Console.WriteLine("2. Deshabilitar Producto");
                 Console.WriteLine("3. Obtener Productos por Categoría");
-                Console.WriteLine("4. Listar Productos con Stock");
+                Console.WriteLine("4. Listar Productos");
                 Console.WriteLine("0. Salir");
                 Console.Write("Ingrese una opción: ");
 
@@ -400,7 +401,7 @@ namespace EcommerceFerreteria.UI
                         ObtenerProductosPorCategorias();
                         break;
                     case "4":
-                        ListarProductosConStock();
+                        ListarProductos();
                         break;
                     case "0":
                         _isAlive = false;
@@ -415,6 +416,11 @@ namespace EcommerceFerreteria.UI
 
         }
 
+        private void ListarProductos()
+        {
+            throw new NotImplementedException();
+        }
+
         private void ObtenerProductosPorCategorias()
         {
             throw new NotImplementedException();
@@ -422,7 +428,58 @@ namespace EcommerceFerreteria.UI
 
         private void RegistrarProducto()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("======REGISTRAR PRODUCTO========");
+            Console.WriteLine("Descripción:");
+            var descripcion = Console.ReadLine();
+
+            if (descripcion == null || descripcion.Trim().Length == 0)
+            {
+                Console.WriteLine("Descripción inválida");
+                return;
+            }
+
+            Console.WriteLine("Precio:");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal precio))
+            {
+                Console.WriteLine("Precio inválido");
+                return;
+            }
+
+            Console.WriteLine("Stock:");
+            if (!int.TryParse(Console.ReadLine(), out int stock))
+            {
+                Console.WriteLine("Stock inválido");
+                return;
+            }
+
+            Console.WriteLine("Seleccione Categoría:");
+            var index = 0;
+            foreach(var categoria in Enum.GetValues(typeof(CategoriaProducto)))
+            {
+                Console.WriteLine($"{ index++} - { categoria}");
+            }
+            Console.Write("Ingrese una opción (Identificador): ");
+
+
+            if (!Enum.TryParse(Console.ReadLine(), out CategoriaProducto categoriaIng))
+            {
+                Console.WriteLine("Categoría inválida.");
+                return;
+            }
+
+
+            var producto = _productoService.CrearProducto(descripcion,precio,stock, categoriaIng);
+
+            if (producto != null)
+            {
+                if (producto.Id > 0)
+                    Console.WriteLine($"El producto se creó satisfactoriamente con el ID :{producto.Id}");
+                else
+                    Console.WriteLine("Ocurrió un error al crear el producto!");
+            }
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
         private void ListarProductosConStock()
