@@ -16,7 +16,7 @@ namespace EcommerceFerreteria
            var productoService = new ProductoService(new ProductoRepository(), new VentaRepository());
            var ventaService = new VentaService(new ClienteRepository(), new VentaRepository());
 
-            var ui = new ConsoleUI(productoService, vendedorService, clienteService,ventaService);
+            var ui = new ConsoleUI2(productoService, vendedorService, clienteService,ventaService);
 
             ui.Iniciar();
         }  
