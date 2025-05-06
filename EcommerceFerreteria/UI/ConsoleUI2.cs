@@ -95,6 +95,7 @@ namespace EcommerceFerreteria.UI
                 Console.WriteLine("3. Obtener Ventas por Vendedor");
                 Console.WriteLine("4. Obtener Ventas por Cliente");
                 Console.WriteLine("5. Obtener Venta por Documento");
+                Console.WriteLine("6. Listar Ventas");
                 Console.WriteLine("0. Salir");
                 Console.Write("Ingrese una opción: ");
 
@@ -117,6 +118,9 @@ namespace EcommerceFerreteria.UI
                     case "5":
                         ObtenerVentasPorDocumento();
                         break;
+                    case "6":
+                        ListarVentas();
+                        break;
                     case "0":
                         _isAlive = false;
                         Console.WriteLine("Saliendo del Mantenimiento de Ventas");
@@ -127,6 +131,33 @@ namespace EcommerceFerreteria.UI
                         break;
                 }
             }
+        }
+
+        private void ListarVentas()
+        {
+            Console.WriteLine("======LISTAR VENTAS========");
+
+            var ventas = _ventaService.ObtenerVentas();
+            if (ventas.Count == 0)
+            {
+                Console.WriteLine("No se ha registrado ninguna venta...");
+                Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+
+            foreach (var vent in ventas)
+            {
+                Console.WriteLine(vent.ToString());
+
+            }
+
+
+            Console.WriteLine("\nPresiones cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
+
         }
 
         private void ObtenerVentasPorDocumento()

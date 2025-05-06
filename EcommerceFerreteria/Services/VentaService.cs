@@ -102,5 +102,10 @@ namespace EcommerceFerreteria.Services
         {
             throw new NotImplementedException();
         }
+
+        List<Venta> IVentaService.ObtenerVentas()
+        {
+            return _ventaRepository.ObtenerTodo();
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace EcommerceFerreteria.Services
         Venta ObtenerPorDocumento(TipoDocumento tipoDoc, string serieDoc, string numeroDoc);
         List<Venta> ObtenerPorTipoDocumento(TipoDocumento tipoDoc);
         bool AnularVenta(TipoDocumento tipoDocumento, string serieDoc, string numeroDoc);
+        List<Venta> ObtenerVentas();
+
 
     }
 }
